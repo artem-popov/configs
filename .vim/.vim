@@ -1,0 +1,1 @@
+/home/artem/configs/.vim

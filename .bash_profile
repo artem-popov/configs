@@ -1,0 +1,1 @@
+xmodmap ~/configs/.xmodmap-capslock
