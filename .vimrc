@@ -2,7 +2,7 @@
 " 'set -o vi'
 " OR
 " 'set editing-mode vi' to .inputrc
-" you can remap capslock to esc with PCKeyboardHack  https://pqrs.org/macosx/keyremap4macbook/pckeyboardhack.html
+" you can remap capslock to esc with Seil  https://pqrs.org/osx/karabiner/seil.html 
 " The https://pqrs.org/osx/karabiner/
 " allows turn your mac os into vim console
 
