@@ -5,6 +5,8 @@
 " you can remap capslock to esc with Seil  https://pqrs.org/osx/karabiner/seil.html 
 " The https://pqrs.org/osx/karabiner/
 " allows turn your mac os into vim console
+"
+" tip: do :PluginInstall once before using.
 
 set nocompatible " turn off vi compatibility mode
 set modelines=0 "do not interpret modelines when editing file
@@ -60,6 +62,8 @@ let g:niji_matching_filetypes = ['js']
 " indent/javascript.vim
 let g:SimpleJsIndenter_BriefMode = 1
 let g:javascript_conceal = 1
+
+call vundle#end()            
 filetype plugin indent on " required by vundle
 "end of vundle config
 
