@@ -11,7 +11,7 @@
 set nocompatible " turn off vi compatibility mode
 set modelines=0 "do not interpret modelines when editing file
 let vimDir = '$HOME/.vim'
-
+set autoread
 
 " Vundle init
 filetype off " vundle requires this
@@ -54,7 +54,7 @@ Bundle 'Lokaltog/vim-distinguished'
 Bundle 'Chiel92/vim-autoformat'
 " Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tmhedberg/matchit'
-" Bundle 'sjl/gundo.vim'
+Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 
 "Plugins settings:
@@ -80,8 +80,9 @@ highlight link javaScriptLambda Identifier
 " control undo
 let mySwapDir = expand(vimDir . '/swapfiles')
 let myUndoDir = expand(vimDir . '/undodir')
-call system('mkdir ' . mySwapDir)
-call system('mkdir ' . myUndoDir)
+call system('mkdir -p ' . mySwapDir)
+call system('mkdir -p ' . myUndoDir)
+
 set undofile                " Save undo's after file closes
 let &undodir = myUndoDir    " where to save undo histories
 set undolevels=1000         " How many undos
@@ -89,6 +90,10 @@ set undoreload=10000        " number of lines to save for undo
 set undolevels=1000
 set history=1000
 set directory=$HOME/.vim/swapfiles// "relative directory for all .swp files
+
+call system('rm -rf ' . mySwapDir . '/*')
+set noswapfile " I've always save like maniac :) 
+
 
 " Theme
 " colors mustang
@@ -259,7 +264,7 @@ autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) 
 nnoremap \t :%s/\s\+$//<cr>:let @/=''<CR>
 " start vimrc in split
 nnoremap \v <C-w><C-v><C-l>:e $MYVIMRC<cr>
-nnoremap \\ :set relativenumber<cr>:e.<cr>
+nnoremap \\ :NERDTree<cr>
 nnoremap \w :w<cr>
 nnoremap \W :w<cr>
 nnoremap \:  q:<cr>
