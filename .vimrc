@@ -11,6 +11,10 @@
 set nocompatible " turn off vi compatibility mode
 set modelines=0 "do not interpret modelines when editing file
 let vimDir = '$HOME/.vim'
+
+" save on lost focus and reload on gain focus
+au FocusGained,BufEnter * :checktime
+" autoread file when :checktime says this
 set autoread
 
 " Vundle init
@@ -151,7 +155,9 @@ set showmode " dont know
 set noshowmatch " when matching bracket is typed don't jump to it - it is better without of it.
 set scrolloff=3 " always visible lines at edge of screen
 set encoding=utf-8
-set hidden " do not kill buffer on hide " do not really know it
+set hidden " do not kill buffer on hide 
+" not yet released :)
+"set breakindent
 
 " --- Fold
 "let javaScript_fold=1
@@ -308,7 +314,8 @@ autocmd CmdwinEnter * nnoremap <buffer> <esc> :q\|echo ""<cr>
 nmap <F8> :TagbarToggle<CR>
 "/> end of keybindings
 
-
+"
+set wildignore=*.swp,*.bak,*.pyc,*.class,node_modules/**
 " --- Misc
 
 
