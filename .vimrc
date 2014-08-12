@@ -64,7 +64,7 @@ Bundle 'scrooloose/nerdtree'
 ":%S/note{,s}/entr{y,ies}/g"
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
-
+Bundle 'terryma/vim-multiple-cursors' 
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
