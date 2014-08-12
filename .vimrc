@@ -48,7 +48,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'marijnh/tern_for_vim'
 " cd ~/.vim/bundle/YouCompleteMe ; ./install.sh --clang-completer ; cd -
 "Bundle 'Valloric/YouCompleteMe'
-Bundle 'justinmk/vim-sneak'
+" Using vim-easymotion instead :)
+" Bundle 'justinmk/vim-sneak'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle "pangloss/vim-javascript"
 Bundle 'tomasr/molokai'
@@ -56,16 +57,41 @@ Bundle 'foldcol.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'Chiel92/vim-autoformat'
-" Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tmhedberg/matchit'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
+":%S/note{,s}/entr{y,ies}/g"
+Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-repeat'
+
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
 " indent/javascript.vim
 let g:SimpleJsIndenter_BriefMode = 1
 let g:javascript_conceal = 1
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+"word-around search
+nmap s <Plug>(easymotion-bd-w)
+"1-char search
+nmap f <Plug>(easymotion-s)
+nmap t <Plug>(easymotion-bd-t)
+"2-chars search
+nmap F <Plug>(easymotion-s2)
+nmap T <Plug>(easymotion-t2)
+"n-char search
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1 " US layout
+
+" JK motions: Line motions
+map zj <Plug>(easymotion-j)
+map zk <Plug>(easymotion-k)
 
 call vundle#end()            
 filetype plugin indent on " required by vundle
@@ -256,8 +282,9 @@ map Ю >
 
 " cancels highlighting created by hlsearch
 nmap \q :nohlsearch<CR>
-nnoremap / /\v
-vnoremap / /\v
+"paranoic regexp mode
+"nnoremap / /\v
+"vnoremap / /\v
 inoremap jj <esc>`^
 inoremap <f2> <esc>`^
 
@@ -298,8 +325,9 @@ vmap <C-S-j> xp'[V']
 " Swap default ':', '/' and '?' with cmdline-window equivalent.
 nnoremap : q:i
 xnoremap : q:i
-nnoremap / q/i
-xnoremap / q/i
+" being enabled hides highlighting, also I'm using easymotion for search.
+"nnoremap / q/i
+"xnoremap / q/i
 nnoremap ? q?i
 xnoremap ? q?i
 nnoremap q: :
