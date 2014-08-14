@@ -16,6 +16,8 @@ let vimDir = '$HOME/.vim'
 au FocusGained,BufEnter * :checktime
 " autoread file when :checktime says this
 set autoread
+set autowrite
+set autowriteall
 
 " Vundle init
 filetype off " vundle requires this
@@ -65,6 +67,12 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
 Bundle 'terryma/vim-multiple-cursors' 
+Bundle 'Shougo/vimshell.vim'
+Bundle 'Shougo/vimproc'
+Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'terryma/vim-expand-region'
+
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
@@ -72,9 +80,17 @@ let g:niji_matching_filetypes = ['js']
 let g:SimpleJsIndenter_BriefMode = 1
 let g:javascript_conceal = 1
 
+let g:vimshell_prompt_expr =
+\ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
+let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '  
+
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 "word-around search
-nmap s <Plug>(easymotion-bd-w)
+"actually fFtFwWeEbB is enough - enable sneak?
+"nmap s <Plug>(easymotion-bd-w)
 "1-char search
 nmap f <Plug>(easymotion-s)
 nmap t <Plug>(easymotion-bd-t)
@@ -96,6 +112,8 @@ map zk <Plug>(easymotion-k)
 call vundle#end()            
 filetype plugin indent on " required by vundle
 "end of vundle config
+
+nnoremap <C-p> :Unite file_rec/async<cr>
 
 if !has('conceal')
     finish
@@ -122,7 +140,18 @@ set history=1000
 set directory=$HOME/.vim/swapfiles// "relative directory for all .swp files
 
 call system('rm -rf ' . mySwapDir . '/*')
+set nobackup
+set nowritebackup
 set noswapfile " I've always save like maniac :) 
+
+" Use a low updatetime. This is used by CursorHold
+set updatetime=1000
+
+           
+" w!!: Writes using sudo
+cnoremap w!! w !sudo tee % >/dev/null
+
+
 
 
 " Theme
@@ -141,6 +170,9 @@ colors distinguished
 "hi CursorLine   cterm=NONE ctermbg=234 ctermfg=NONE
 "hi MatchParen cterm=none ctermbg=green ctermfg=blue
 "hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+
+set virtualedit=all " onemore
+
 
 " --- Editor theme
 set number
@@ -196,7 +228,7 @@ set foldlevel=0
 set wrap
 set linebreak
 set nolist
-set showbreak=…
+set showbreak=↪
 set noerrorbells
 set vb
 set t_Co=256
@@ -340,12 +372,28 @@ xnoremap q? ?
 autocmd CmdwinEnter * nnoremap <buffer> <esc> :q\|echo ""<cr>
 
 nmap <F8> :TagbarToggle<CR>
+nnoremap <F5> :GundoToggle<CR>
 "/> end of keybindings
 
-"
-set wildignore=*.swp,*.bak,*.pyc,*.class,node_modules/**
+noremap j gj
+noremap k gk
+nnoremap U :redo<cr>
+noremap H ^
+noremap L g_
+ 
+"stuff to ignore when tab completing
+set wildignore=*.bak,*.pyc,*.class,node_modules/**
+set wildignore+=*.o,*.obj,*~ 
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
+set wildignore+=*/.nx/**,*.app
 " --- Misc
-
 
 
 " git config --global diff.tool vimdiff
