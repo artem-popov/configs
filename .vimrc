@@ -69,6 +69,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'terryma/vim-multiple-cursors' 
 Bundle 'Shougo/vimshell.vim'
 Bundle 'Shougo/vimproc'
+Bundle 'Shougo/unite.vim'
 Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-expand-region'
@@ -114,6 +115,11 @@ filetype plugin indent on " required by vundle
 "end of vundle config
 
 nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <Space>/ :Unite grep:. <cr>
+let g:unite_source_history_yank_enable = 1
+nnoremap <Space>y :Unite history/yank<cr>
+nnoremap <Space>s :Unite -quick-match -auto-preview buffer<cr>
+
 
 if !has('conceal')
     finish
