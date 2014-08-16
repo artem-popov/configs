@@ -12,12 +12,11 @@ set nocompatible " turn off vi compatibility mode
 set modelines=0 "do not interpret modelines when editing file
 let vimDir = '$HOME/.vim'
 
-" save on lost focus and reload on gain focus
 au FocusGained,BufEnter * :checktime
 " autoread file when :checktime says this
 set autoread
-set autowrite
-set autowriteall
+"set autowrite
+"set autowriteall
 
 " Vundle init
 filetype off " vundle requires this
@@ -93,22 +92,23 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 "actually fFtFwWeEbB is enough - enable sneak?
 "nmap s <Plug>(easymotion-bd-w)
 "1-char search
-nmap f <Plug>(easymotion-s)
-nmap t <Plug>(easymotion-bd-t)
+nmap s <Plug>(easymotion-s)
+"nmap t <Plug>(easymotion-bd-t)
 "2-chars search
-nmap F <Plug>(easymotion-s2)
-nmap T <Plug>(easymotion-t2)
+nmap S <Plug>(easymotion-s2)
+"nmap T <Plug>(easymotion-t2)
 "n-char search
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1 " US layout
 
 " JK motions: Line motions
 map zj <Plug>(easymotion-j)
 map zk <Plug>(easymotion-k)
+
+map <c-o> :bp <cr>
+map <c-i> :bn <cr>
 
 call vundle#end()            
 filetype plugin indent on " required by vundle
@@ -118,7 +118,9 @@ nnoremap <C-p> :Unite file_rec/async<cr>
 nnoremap <Space>/ :Unite grep:. <cr>
 let g:unite_source_history_yank_enable = 1
 nnoremap <Space>y :Unite history/yank<cr>
-nnoremap <Space>s :Unite -quick-match -auto-preview buffer<cr>
+nnoremap <Space>s :Unite -quick-match buffer<cr>
+
+
 
 
 if !has('conceal')
@@ -386,7 +388,16 @@ noremap k gk
 nnoremap U :redo<cr>
 noremap H ^
 noremap L g_
- 
+imap <leader><tab> <C-x><C-o> 
+
+" Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
+if has("autocmd")
+ augroup myvimrchooks
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc
+ augroup END
+endif
+
 "stuff to ignore when tab completing
 set wildignore=*.bak,*.pyc,*.class,node_modules/**
 set wildignore+=*.o,*.obj,*~ 
