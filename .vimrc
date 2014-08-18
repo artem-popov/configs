@@ -74,6 +74,7 @@ Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-expand-region'
 Bundle 'raichoo/purescript-vim.git'
+Bundle 'YankRing.vim'
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
@@ -84,7 +85,7 @@ let g:javascript_conceal = 1
 let g:vimshell_prompt_expr =
 \ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '  
-
+inoremap <S-TAB> <c-h><c-h><c-h><c-h>
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
 
@@ -108,8 +109,7 @@ let g:EasyMotion_use_smartsign_us = 1 " US layout
 map zj <Plug>(easymotion-j)
 map zk <Plug>(easymotion-k)
 
-map <c-o> :silent! :bp <cr>
-map <c-i> :silent! :bn <cr>
+nmap <tab> q:b#<CR>
 
 " save session on exit, reload it on enter vim
 "autocmd BufEnter,VimLeavePre * mksession! ./.session.vim
@@ -184,7 +184,8 @@ colors distinguished
 "hi MatchParen cterm=none ctermbg=green ctermfg=blue
 "hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
-set virtualedit=all " onemore
+"uncomment to edit all area
+"set virtualedit=all " onemore
 
 
 " --- Editor theme
