@@ -1,0 +1,9 @@
+[user]
+	name = Artem Popov
+	email = artem.popov@outlook.com
+[branch]
+	autosetuprebase = always
+[branch "master"]
+	rebase = true
+[color]
+	ui = true

@@ -15,6 +15,7 @@ let vimDir = '$HOME/.vim'
 au FocusGained,BufEnter * :checktime
 " autoread file when :checktime says this
 set autoread
+au CursorHold * checktime
 "set autowrite
 "set autowriteall
 
@@ -72,7 +73,7 @@ Bundle 'Shougo/unite.vim'
 Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-expand-region'
-
+Bundle 'raichoo/purescript-vim.git'
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
@@ -107,8 +108,12 @@ let g:EasyMotion_use_smartsign_us = 1 " US layout
 map zj <Plug>(easymotion-j)
 map zk <Plug>(easymotion-k)
 
-map <c-o> :bp <cr>
-map <c-i> :bn <cr>
+map <c-o> :silent! :bp <cr>
+map <c-i> :silent! :bn <cr>
+
+" save session on exit, reload it on enter vim
+"autocmd BufEnter,VimLeavePre * mksession! ./.session.vim
+"autocmd VimEnter * so ./.session.vim
 
 call vundle#end()            
 filetype plugin indent on " required by vundle
