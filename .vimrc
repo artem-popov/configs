@@ -119,11 +119,12 @@ call vundle#end()
 filetype plugin indent on " required by vundle
 "end of vundle config
 
-nnoremap <C-p> :Unite file_rec/async<cr>
-nnoremap <Space>/ :Unite grep:. <cr>
+nnoremap <C-Q> :Unite -quick-match -start-insert file_rec/async <cr>
+nnoremap <Space>/ :Unite -quick-match grep:. <cr>
 let g:unite_source_history_yank_enable = 1
-nnoremap <Space>y :Unite history/yank<cr>
-nnoremap <Space>s :Unite -quick-match buffer<cr>
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <Space>y :Unite -quick-match history/yank<cr>
+nnoremap <Space>s :Unite -no-split -quick-match buffer<cr>
 
 
 
