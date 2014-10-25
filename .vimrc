@@ -75,6 +75,7 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-expand-region'
 Bundle 'raichoo/purescript-vim.git'
 Bundle 'YankRing.vim'
+Bundle 'derekwyatt/vim-scala'
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
