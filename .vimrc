@@ -15,7 +15,7 @@ let vimDir = '$HOME/.vim'
 au FocusGained,BufEnter * :checktime
 " autoread file when :checktime says this
 set autoread
-au CursorHold * checktime
+"au CursorHold * checktime "wrong with command mode
 "set autowrite
 "set autowriteall
 
@@ -76,6 +76,7 @@ Bundle 'terryma/vim-expand-region'
 Bundle 'raichoo/purescript-vim.git'
 Bundle 'YankRing.vim'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'leafgarland/typescript-vim'
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
@@ -128,7 +129,8 @@ nnoremap <Space>y :Unite -quick-match history/yank<cr>
 nnoremap <Space>s :Unite -no-split -quick-match buffer<cr>
 
 
-
+" Sweet.js filetype: *.sjs
+au! BufRead,BufNewFile *.sjs		setfiletype javascript
 
 if !has('conceal')
     finish
@@ -348,7 +350,7 @@ nnoremap \v <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap \\ :NERDTree<cr>
 nnoremap \w :w<cr>
 nnoremap \W :w<cr>
-nnoremap \:  q:<cr>
+nnoremap :  q:<cr>
 
 " cancel arrows keys
 inoremap <Up> <NOP>
@@ -376,14 +378,10 @@ xnoremap : q:i
 " being enabled hides highlighting, also I'm using easymotion for search.
 "nnoremap / q/i
 "xnoremap / q/i
-nnoremap ? q?i
-xnoremap ? q?i
+"nnoremap ? q?i
+"xnoremap ? q?i
 nnoremap q: :
 xnoremap q: :
-nnoremap q/ /
-xnoremap q/ /
-nnoremap q? ?
-xnoremap q? ?
 " Have <esc> leave cmdline-window
 autocmd CmdwinEnter * nnoremap <buffer> <esc> :q\|echo ""<cr>
 
