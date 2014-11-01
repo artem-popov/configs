@@ -77,6 +77,7 @@ Bundle 'raichoo/purescript-vim.git'
 Bundle 'YankRing.vim'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'fatih/vim-go'
 
 "Plugins settings:
 let g:niji_matching_filetypes = ['js']
