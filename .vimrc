@@ -8,6 +8,17 @@
 "
 " tip: do :PluginInstall once before using.
 
+" to hide files use:
+" let NERDTreeIgnore = ['\.js$']
+
+" fly on buffers
+nnoremap gb :ls<CR>:b<Space>
+nnoremap <s-tab> :b<Space><Tab>
+set wildmenu
+set wildcharm=<Tab>
+set wildmode=longest:full
+
+
 set nocompatible " turn off vi compatibility mode
 set modelines=0 "do not interpret modelines when editing file
 let vimDir = '$HOME/.vim'
@@ -85,9 +96,6 @@ let g:niji_matching_filetypes = ['js']
 let g:SimpleJsIndenter_BriefMode = 1
 let g:javascript_conceal = 1
 
-let g:vimshell_prompt_expr =
-\ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
-let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '  
 inoremap <S-TAB> <c-h><c-h><c-h><c-h>
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
