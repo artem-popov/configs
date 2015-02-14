@@ -50,21 +50,15 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 " autoclose [], {}, etc
 Bundle 'Raimondi/delimitMate'
-" to enable suntactic do: npm install -g jshint
-Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tComment'
 Bundle 'jszakmeister/vim-togglecursor'
 Bundle 'tpope/vim-surround'
-" cd ~/.vim/bundle/tern_for_vim ; npm install
-Bundle 'marijnh/tern_for_vim'
 " cd ~/.vim/bundle/YouCompleteMe ; ./install.sh --clang-completer ; cd -
 "Bundle 'Valloric/YouCompleteMe'
 " Using vim-easymotion instead :)
 " Bundle 'justinmk/vim-sneak'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle "pangloss/vim-javascript"
 Bundle 'tomasr/molokai'
 Bundle 'foldcol.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
@@ -84,13 +78,79 @@ Bundle 'Shougo/unite.vim'
 Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-expand-region'
-Bundle 'raichoo/purescript-vim.git'
 Bundle 'YankRing.vim'
+Bundle 'reedes/vim-wheel'
+Bundle 'godlygeek/tabular.git'
+Bundle 'kana/vim-textobj-user'
+Bundle 'sgur/vim-textobj-parameter'
+Bundle 'thinca/vim-textobj-between'
+
+" to enable suntactic do: npm install -g jshint
+Bundle 'scrooloose/syntastic'
+" cd ~/.vim/bundle/tern_for_vim ; npm install
+Bundle 'marijnh/tern_for_vim'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle "pangloss/vim-javascript"
+Bundle 'raichoo/purescript-vim.git'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'fatih/vim-go'
-
+Bundle 'eagletmt/neco-ghc'
+set omnifunc=syntaxcomplete#Complete
 "Plugins settings:
+
+Bundle 'itchyny/lightline.vim'
+
+""---------powerline begin 
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'readonly': 'MyReadonly',
+      \   'modified': 'MyModified',
+      \   'filename': 'MyFilename'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! MyFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+"---------/powerline
+
 let g:niji_matching_filetypes = ['js']
 " indent/javascript.vim
 let g:SimpleJsIndenter_BriefMode = 1
@@ -99,6 +159,23 @@ let g:javascript_conceal = 1
 inoremap <S-TAB> <c-h><c-h><c-h><c-h>
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
+
+" Syntactic
+" Haskell
+" Type Lookup
+map <silent> <Leader>e :Errors<CR>
+map <Leader>s :SyntasticToggleMode<CR>
+" Reload
+map <silent> tu :call GHC_BrowseAll()<CR>
+" Type Lookup
+map <silent> tw :call GHC_ShowType(1)<CR>"always show error list
+" let g:syntastic_auto_loc_list=1
+" cabal update && cabal install ghc-mod hoogle
+" let g:syntastic_typescript_checkers = ['tslint']
+
+
+
+" let g:syntastic_typescript_tsc_args = " | echo 'test' "
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 "word-around search
@@ -229,11 +306,16 @@ set clipboard=unnamed
 
 
 " --- Text behaviour
+
+" --- Tab specific options
+set tabstop=4        "A tab is 8 spaces
+set expandtab        "Always uses spaces instead of tabs
+set softtabstop=4    "Insert 4 spaces when tab is pressed
+set shiftwidth=4     "An indent is 4 spaces
+set shiftround       "Round indent to nearest shiftwidth multiple
+
 set autoindent "to check
 set cindent
-set shiftwidth=4
-set tabstop=4
-set expandtab
 set smartindent
 set showcmd
 set showmode " dont know
