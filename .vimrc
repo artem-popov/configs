@@ -95,11 +95,14 @@ Bundle 'raichoo/purescript-vim.git'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'fatih/vim-go'
-Bundle 'eagletmt/neco-ghc'
-set omnifunc=syntaxcomplete#Complete
-"Plugins settings:
+Bundle 'ajh17/Spacegray.vim' 
 
+Bundle 'eagletmt/neco-ghc'
 Bundle 'itchyny/lightline.vim'
+
+"Plugins settings:
+set omnifunc=syntaxcomplete#Complete
+
 
 ""---------powerline begin 
 let g:lightline = {
@@ -261,7 +264,8 @@ cnoremap w!! w !sudo tee % >/dev/null
 " colors mustang
 " colors molokai
 colors distinguished
-"let g:molokai_original=1
+" colors spacegray
+" let g:molokai_original=1
 " let g:rehash256 = 1
 " set background=dark
 " let g:solarized_termcolors=256
@@ -509,7 +513,20 @@ set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/*
 set wildignore+=*/.nx/**,*.app
 " --- Misc
 
-
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> \z  :ZoomToggle<CR>
 " git config --global diff.tool vimdiff
 
 "syntastic               vim-ctrlspace       
