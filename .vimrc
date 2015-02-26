@@ -11,7 +11,7 @@
 " to hide files use:
 " let NERDTreeIgnore = ['\.js$']
 
-" fly on buffers
+" alt tab fly on buffers
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <s-tab> :b<Space><Tab>
 set wildmenu
@@ -98,62 +98,13 @@ Bundle 'fatih/vim-go'
 Bundle 'ajh17/Spacegray.vim' 
 
 Bundle 'eagletmt/neco-ghc'
-Bundle 'itchyny/lightline.vim'
+" Bundle 'itchyny/lightline.vim'
+Bundle 'bling/vim-airline'
 
 "Plugins settings:
 set omnifunc=syntaxcomplete#Complete
 
-
-""---------powerline begin 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'MyFugitive',
-      \   'readonly': 'MyReadonly',
-      \   'modified': 'MyModified',
-      \   'filename': 'MyFilename'
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
-
-function! MyModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! MyReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return "⭤"
-  else
-    return ""
-  endif
-endfunction
-
-function! MyFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
-
-function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-       \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-"---------/powerline
-
+let g:airline_powerline_fonts = 1
 let g:niji_matching_filetypes = ['js']
 " indent/javascript.vim
 let g:SimpleJsIndenter_BriefMode = 1
@@ -200,7 +151,7 @@ let g:EasyMotion_use_smartsign_us = 1 " US layout
 map zj <Plug>(easymotion-j)
 map zk <Plug>(easymotion-k)
 
-nmap <tab> q:b#<CR>
+" nmap <tab> q:b#<CR>
 
 " save session on exit, reload it on enter vim
 "autocmd BufEnter,VimLeavePre * mksession! ./.session.vim
