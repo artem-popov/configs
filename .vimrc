@@ -14,6 +14,10 @@
 " alt tab fly on buffers
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <s-tab> :b<Space><Tab>
+
+nnoremap <c-i> :bnext<cr>
+nnoremap <c-o> :bprev<cr>
+
 set wildmenu
 set wildcharm=<Tab>
 set wildmode=longest:full
