@@ -93,8 +93,24 @@ Bundle 'thinca/vim-textobj-between'
 Bundle 'scrooloose/syntastic'
 " cd ~/.vim/bundle/tern_for_vim ; npm install
 Bundle 'marijnh/tern_for_vim'
-Bundle 'jelera/vim-javascript-syntax'
+" Bundle 'jelera/vim-javascript-syntax'
+" Intendation and syntax:
 Bundle "pangloss/vim-javascript"
+Bundle 'mxw/vim-jsx'
+
+" Lexical scope coloring:
+":JSContextColorUpdate
+Bundle 'bigfish/vim-js-context-coloring'
+
+"To disable:
+"g:js_context_colors_enabled = 0
+"NeoBundle 'bigfish/vim-js-context-coloring', {
+""  \ 'build' : {
+""  \     'mac' : 'npm install --update',
+""  \     'unix' : 'npm install --update',
+""  \    },
+""  \ }
+
 Bundle 'raichoo/purescript-vim.git'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'leafgarland/typescript-vim'
@@ -102,8 +118,11 @@ Bundle 'fatih/vim-go'
 Bundle 'ajh17/Spacegray.vim' 
 
 Bundle 'eagletmt/neco-ghc'
-" Bundle 'itchyny/lightline.vim'
 Bundle 'bling/vim-airline'
+
+" Plugin to show color palette:
+":XtermColorTable
+Bundle 'guns/xterm-color-table.vim'
 
 "Plugins settings:
 set omnifunc=syntaxcomplete#Complete
@@ -217,8 +236,8 @@ cnoremap w!! w !sudo tee % >/dev/null
 
 " Theme
 " colors mustang
-" colors molokai
-colors distinguished
+colors molokai
+" colors distinguished
 " colors spacegray
 " let g:molokai_original=1
 " let g:rehash256 = 1
