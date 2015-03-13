@@ -89,11 +89,14 @@ Bundle 'kana/vim-textobj-user'
 Bundle 'sgur/vim-textobj-parameter'
 Bundle 'thinca/vim-textobj-between'
 
-" to enable suntactic do: npm install -g jshint
+" to enable suntactic do: npm install -g jsxhint
 Bundle 'scrooloose/syntastic'
+let g:syntastic_javascript_checkers = ['jsxhint']
+
+
 " cd ~/.vim/bundle/tern_for_vim ; npm install
 Bundle 'marijnh/tern_for_vim'
-" Bundle 'jelera/vim-javascript-syntax'
+Bundle 'jelera/vim-javascript-syntax'
 " Intendation and syntax:
 Bundle "pangloss/vim-javascript"
 Bundle 'mxw/vim-jsx'
@@ -101,9 +104,9 @@ Bundle 'mxw/vim-jsx'
 " Lexical scope coloring:
 ":JSContextColorUpdate
 Bundle 'bigfish/vim-js-context-coloring'
-
+let g:js_context_colors_insertmode = 0
 "To disable:
-"g:js_context_colors_enabled = 0
+" g:js_context_colors_enabled = 0
 "NeoBundle 'bigfish/vim-js-context-coloring', {
 ""  \ 'build' : {
 ""  \     'mac' : 'npm install --update',
@@ -123,6 +126,32 @@ Bundle 'bling/vim-airline'
 " Plugin to show color palette:
 ":XtermColorTable
 Bundle 'guns/xterm-color-table.vim'
+
+Bundle 'kien/rainbow_parentheses.vim'
+" let g:rbpt_colorpairs = [
+"     \ ['brown',       'RoyalBlue3'],
+"     \ ['Darkblue',    'SeaGreen3'],
+"     \ ['darkgray',    'DarkOrchid3'],
+"     \ ['darkgreen',   'firebrick3'],
+"     \ ['darkcyan',    'RoyalBlue3'],
+"     \ ['darkred',     'SeaGreen3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ['brown',       'firebrick3'],
+"     \ ['gray',        'RoyalBlue3'],
+"     \ ['black',       'SeaGreen3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ['Darkblue',    'firebrick3'],
+"     \ ['darkgreen',   'RoyalBlue3'],
+"     \ ['darkcyan',    'SeaGreen3'],
+"     \ ['darkred',     'DarkOrchid3'],
+"     \ ['red',         'firebrick3'],
+"     \ ]
+" let g:rbpt_max = 16
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+au Syntax * RainbowParenthesesLoadChevrons
 
 "Plugins settings:
 set omnifunc=syntaxcomplete#Complete
