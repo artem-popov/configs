@@ -34,76 +34,104 @@ set autoread
 "set autowrite
 "set autowriteall
 
-" Vundle init
-filetype off " vundle requires this
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Bundle 'gmarik/Vundle.vim'
-Bundle 'L9'
+
+"NeoBundle Scripts-----------------------------
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('/Users/artem/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'L9'
 
 "Bundles
-"Bundle 'majutsushi/tagbar'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'FuzzyFinder'
+"NeoBundle 'majutsushi/tagbar'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'FuzzyFinder'
 " for tagbar install:
 "npm install -g git://github.com/ramitos/jsctags.git
-Bundle 'majutsushi/tagbar'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle "tomtom/tlib_vim"
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle "tomtom/tlib_vim"
+NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'honza/vim-snippets'
 " autoclose [], {}, etc
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tComment'
-Bundle 'jszakmeister/vim-togglecursor'
-Bundle 'tpope/vim-surround'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tComment'
+NeoBundle 'jszakmeister/vim-togglecursor'
+NeoBundle 'tpope/vim-surround'
 " cd ~/.vim/bundle/YouCompleteMe ; ./install.sh --clang-completer ; cd -
-"Bundle 'Valloric/YouCompleteMe'
+"NeoBundle 'Valloric/YouCompleteMe'
 " Using vim-easymotion instead :)
-" Bundle 'justinmk/vim-sneak'
-Bundle 'tomasr/molokai'
-Bundle 'foldcol.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'Chiel92/vim-autoformat'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tmhedberg/matchit'
-Bundle 'sjl/gundo.vim'
-Bundle 'scrooloose/nerdtree'
+" NeoBundle 'justinmk/vim-sneak'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'foldcol.vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'Lokaltog/vim-distinguished'
+NeoBundle 'Chiel92/vim-autoformat'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'tmhedberg/matchit'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'scrooloose/nerdtree'
 ":%S/note{,s}/entr{y,ies}/g"
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-repeat'
-Bundle 'terryma/vim-multiple-cursors' 
-Bundle 'Shougo/vimshell.vim'
-Bundle 'Shougo/vimproc'
-Bundle 'Shougo/unite.vim'
-Bundle 'amirh/HTML-AutoCloseTag'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'terryma/vim-expand-region'
-Bundle 'YankRing.vim'
-Bundle 'reedes/vim-wheel'
-Bundle 'godlygeek/tabular.git'
-Bundle 'kana/vim-textobj-user'
-Bundle 'sgur/vim-textobj-parameter'
-Bundle 'thinca/vim-textobj-between'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'terryma/vim-multiple-cursors' 
+NeoBundle 'Shougo/vimshell.vim'
+
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'amirh/HTML-AutoCloseTag'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'terryma/vim-expand-region'
+NeoBundle 'YankRing.vim'
+NeoBundle 'reedes/vim-wheel'
+NeoBundle 'godlygeek/tabular.git'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'sgur/vim-textobj-parameter'
+NeoBundle 'thinca/vim-textobj-between'
 
 " to enable suntactic do: npm install -g jsxhint
-Bundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['jsxhint']
 
 
 " cd ~/.vim/bundle/tern_for_vim ; npm install
-Bundle 'marijnh/tern_for_vim'
-Bundle 'jelera/vim-javascript-syntax'
+NeoBundle 'marijnh/tern_for_vim', {
+            \ 'build' : {
+            \   'mac': 'npm install --update',
+            \   },
+            \ }
+
+NeoBundle 'jelera/vim-javascript-syntax'
 " Intendation and syntax:
-Bundle "pangloss/vim-javascript"
-Bundle 'mxw/vim-jsx'
+NeoBundle "pangloss/vim-javascript"
+NeoBundle 'mxw/vim-jsx'
 
 " Lexical scope coloring:
 ":JSContextColorUpdate
-Bundle 'bigfish/vim-js-context-coloring'
+NeoBundle 'bigfish/vim-js-context-coloring'
 let g:js_context_colors_insertmode = 0
 "To disable:
 " g:js_context_colors_enabled = 0
@@ -114,20 +142,20 @@ let g:js_context_colors_insertmode = 0
 ""  \    },
 ""  \ }
 
-Bundle 'raichoo/purescript-vim.git'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'leafgarland/typescript-vim'
-Bundle 'fatih/vim-go'
-Bundle 'ajh17/Spacegray.vim' 
+NeoBundle 'raichoo/purescript-vim.git'
+NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'ajh17/Spacegray.vim' 
 
-Bundle 'eagletmt/neco-ghc'
-Bundle 'bling/vim-airline'
+NeoBundle 'eagletmt/neco-ghc'
+NeoBundle 'bling/vim-airline'
 
 " Plugin to show color palette:
 ":XtermColorTable
-Bundle 'guns/xterm-color-table.vim'
+NeoBundle 'guns/xterm-color-table.vim'
 
-Bundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'kien/rainbow_parentheses.vim'
 " let g:rbpt_colorpairs = [
 "     \ ['brown',       'RoyalBlue3'],
 "     \ ['Darkblue',    'SeaGreen3'],
@@ -153,6 +181,19 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 au Syntax * RainbowParenthesesLoadChevrons
 
+
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+    
 "Plugins settings:
 set omnifunc=syntaxcomplete#Complete
 
@@ -208,10 +249,6 @@ map zk <Plug>(easymotion-k)
 " save session on exit, reload it on enter vim
 "autocmd BufEnter,VimLeavePre * mksession! ./.session.vim
 "autocmd VimEnter * so ./.session.vim
-
-call vundle#end()            
-filetype plugin indent on " required by vundle
-"end of vundle config
 
 nnoremap <C-Q> :Unite -quick-match -start-insert file_rec/async <cr>
 nnoremap <Space>/ :Unite -quick-match grep:. <cr>
