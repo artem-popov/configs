@@ -12,3 +12,5 @@
 [core]
 	editor = /usr/local/bin/vim
    
+[url "https://"]
+	insteadOf = git://

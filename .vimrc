@@ -11,12 +11,15 @@
 " to hide files use:
 " let NERDTreeIgnore = ['\.js$']
 
+let g:netrw_liststyle=3
+
 " alt tab fly on buffers
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <s-tab> :b<Space><Tab>
 
-nnoremap <c-i> :bnext<cr>
-nnoremap <c-o> :bprev<cr>
+" no need this at all: this list is not connected with history
+" nnoremap <c-i> :bnext<cr>
+" nnoremap <c-o> :bprev<cr>
 
 set wildmenu
 set wildcharm=<Tab>
@@ -127,20 +130,20 @@ NeoBundle 'marijnh/tern_for_vim', {
 NeoBundle 'jelera/vim-javascript-syntax'
 " Intendation and syntax:
 NeoBundle "pangloss/vim-javascript"
-NeoBundle 'mxw/vim-jsx'
+" NeoBundle 'mxw/vim-jsx'
 
 " Lexical scope coloring:
 ":JSContextColorUpdate
-NeoBundle 'bigfish/vim-js-context-coloring'
 let g:js_context_colors_insertmode = 0
 "To disable:
 " g:js_context_colors_enabled = 0
-"NeoBundle 'bigfish/vim-js-context-coloring', {
-""  \ 'build' : {
-""  \     'mac' : 'npm install --update',
-""  \     'unix' : 'npm install --update',
-""  \    },
-""  \ }
+NeoBundle 'bigfish/vim-js-context-coloring'
+NeoBundle 'bigfish/vim-js-context-coloring', {
+  \ 'build' : {
+  \     'mac' : 'npm install --update',
+  \     'unix' : 'npm install --update',
+  \    },
+  \ }
 
 NeoBundle 'raichoo/purescript-vim.git'
 NeoBundle 'derekwyatt/vim-scala'
@@ -302,9 +305,9 @@ cnoremap w!! w !sudo tee % >/dev/null
 
 " Theme
 " colors mustang
-colors molokai
+" colors molokai
 " colors distinguished
-" colors spacegray
+colors spacegray
 " let g:molokai_original=1
 " let g:rehash256 = 1
 " set background=dark
@@ -488,15 +491,15 @@ nnoremap \W :w<cr>
 nnoremap :  q:<cr>
 
 " cancel arrows keys
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
+" inoremap <Up> <NOP>
+" inoremap <Down> <NOP>
+" inoremap <Left> <NOP>
+" inoremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
+"
 
 " Move lines
 " Move one line
