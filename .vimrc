@@ -2,9 +2,10 @@
 " 'set -o vi'
 " OR
 " 'set editing-mode vi' to .inputrc
-" you can remap capslock to esc with Seil  https://pqrs.org/osx/karabiner/seil.html 
+" you can remap capslock to esc with Seil  https://pqrs.org/osx/karabiner/seil.html
 " The https://pqrs.org/osx/karabiner/
 " allows turn your mac os into vim console
+" brew install Caskroom/cask/seil
 "
 " tip: do :PluginInstall once before using.
 
@@ -14,8 +15,8 @@
 let g:netrw_liststyle=3
 
 " alt tab fly on buffers
-nnoremap gb :ls<CR>:b<Space>
-nnoremap <s-tab> :b<Space><Tab>
+" nnoremap gb :ls<CR>:b<Space>
+" nnoremap <s-tab> :b<Space><Tab>
 
 " no need this at all: this list is not connected with history
 " nnoremap <c-i> :bnext<cr>
@@ -23,7 +24,7 @@ nnoremap <s-tab> :b<Space><Tab>
 
 set wildmenu
 set wildcharm=<Tab>
-set wildmode=longest:full
+set wildmode=full
 
 
 set nocompatible " turn off vi compatibility mode
@@ -91,8 +92,14 @@ NeoBundle 'scrooloose/nerdtree'
 ":%S/note{,s}/entr{y,ies}/g"
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'terryma/vim-multiple-cursors' 
+NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'mhinz/vim-grepper'
+" NeoBundle 'kassio/neoterm'
+
+NeoBundle 'epegzz/epegzz.vim'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'kristijanhusak/vim-hybrid-material'
 
 NeoBundle 'Shougo/vimproc.vim', {
 \ 'build' : {
@@ -103,22 +110,41 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
+" NeoBundle 'Shougo/unite.vim'
+NeoBundle "ctrlpvim/ctrlp.vim"
 
-NeoBundle 'Shougo/unite.vim'
+nnoremap <leader>f :CtrlP<cr><Space>
+nnoremap <s-tab> :CtrlPBuffer<cr>
+
+
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 NeoBundle 'amirh/HTML-AutoCloseTag'
-NeoBundle 'airblade/vim-gitgutter'
+" NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'terryma/vim-expand-region'
 NeoBundle 'YankRing.vim'
-NeoBundle 'reedes/vim-wheel'
+" NeoBundle 'reedes/vim-wheel'
 NeoBundle 'godlygeek/tabular.git'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'sgur/vim-textobj-parameter'
 NeoBundle 'thinca/vim-textobj-between'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 " to enable suntactic do: npm install -g jsxhint
 NeoBundle 'scrooloose/syntastic'
-let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+
+" turn it on or off
+nnoremap <leader>N :SyntasticToggleMode<cr>
 
 " cd ~/.vim/bundle/tern_for_vim ; npm install
 NeoBundle 'marijnh/tern_for_vim', {
@@ -129,8 +155,10 @@ NeoBundle 'marijnh/tern_for_vim', {
 
 NeoBundle 'jelera/vim-javascript-syntax'
 " Intendation and syntax:
-NeoBundle "pangloss/vim-javascript"
-" NeoBundle 'mxw/vim-jsx'
+NeoBundle "pangloss/vim-javascript"  " Required for vim-jsx to work correctly
+NeoBundle 'mxw/vim-jsx'
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+" let g:syntastic_debug = 3   " Turn on if there are problems
 
 " Lexical scope coloring:
 ":JSContextColorUpdate
@@ -149,7 +177,7 @@ NeoBundle 'raichoo/purescript-vim.git'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'fatih/vim-go'
-NeoBundle 'ajh17/Spacegray.vim' 
+NeoBundle 'ajh17/Spacegray.vim'
 
 NeoBundle 'eagletmt/neco-ghc'
 NeoBundle 'bling/vim-airline'
@@ -157,7 +185,7 @@ NeoBundle 'bling/vim-airline'
 " Plugin to show color palette:
 ":XtermColorTable
 NeoBundle 'guns/xterm-color-table.vim'
-
+NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'kien/rainbow_parentheses.vim'
 " let g:rbpt_colorpairs = [
 "     \ ['brown',       'RoyalBlue3'],
@@ -196,7 +224,7 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
-    
+
 "Plugins settings:
 set omnifunc=syntaxcomplete#Complete
 
@@ -210,19 +238,18 @@ inoremap <S-TAB> <c-h><c-h><c-h><c-h>
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
 
-" Syntactic
-" Haskell
-" Type Lookup
-map <silent> <Leader>e :Errors<CR>
-map <Leader>s :SyntasticToggleMode<CR>
-" Reload
-map <silent> tu :call GHC_BrowseAll()<CR>
-" Type Lookup
-map <silent> tw :call GHC_ShowType(1)<CR>"always show error list
-" let g:syntastic_auto_loc_list=1
-" cabal update && cabal install ghc-mod hoogle
-" let g:syntastic_typescript_checkers = ['tslint']
-
+" " Syntactic
+" " Haskell
+" " Type Lookup
+" map <silent> <Leader>e :Errors<CR>
+" map <Leader>s :SyntasticToggleMode<CR>
+" " Reload
+" map <silent> tu :call GHC_BrowseAll()<CR>
+" " Type Lookup
+" map <silent> tw :call GHC_ShowType(1)<CR>"always show error list
+" " let g:syntastic_auto_loc_list=1
+" " cabal update && cabal install ghc-mod hoogle
+" " let g:syntastic_typescript_checkers = ['tslint']
 
 
 " let g:syntastic_typescript_tsc_args = " | echo 'test' "
@@ -253,12 +280,14 @@ map zk <Plug>(easymotion-k)
 "autocmd BufEnter,VimLeavePre * mksession! ./.session.vim
 "autocmd VimEnter * so ./.session.vim
 
-nnoremap <C-Q> :Unite -quick-match -start-insert file_rec/async <cr>
-nnoremap <Space>/ :Unite -quick-match grep:. <cr>
-let g:unite_source_history_yank_enable = 1
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <Space>y :Unite -quick-match history/yank<cr>
-nnoremap <Space>s :Unite -no-split -quick-match buffer<cr>
+autocmd BufNewFile,BufRead /git/atlant.js/* set nowrap tabstop=4 shiftwidth=4
+
+" nnoremap <C-Q> :Unite -quick-match -start-insert file_rec/async <cr>
+" nnoremap <Space>/ :Unite -quick-match grep:. <cr>
+" let g:unite_source_history_yank_enable = 1
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" nnoremap <Space>y :Unite -quick-match history/yank<cr>
+" nnoremap <Space>s :Unite -no-split -quick-match buffer<cr>
 
 
 " Sweet.js filetype: *.sjs
@@ -269,10 +298,11 @@ if !has('conceal')
 endif
 set conceallevel=2
 setlocal conceallevel=2
-syntax keyword javaScriptLambda function conceal cchar=λ
+" syntax keyword javaScriptLambda function conceal cchar=λ
 highlight clear Conceal
 highlight link Conceal Identifier
 highlight link javaScriptLambda Identifier
+
 
 " control undo
 let mySwapDir = expand(vimDir . '/swapfiles')
@@ -291,12 +321,12 @@ set directory=$HOME/.vim/swapfiles// "relative directory for all .swp files
 call system('rm -rf ' . mySwapDir . '/*')
 set nobackup
 set nowritebackup
-set noswapfile " I've always save like maniac :) 
+set noswapfile " I've always save like maniac :)
 
 " Use a low updatetime. This is used by CursorHold
-set updatetime=1000
+" set updatetime=1000
 
-           
+
 " w!!: Writes using sudo
 cnoremap w!! w !sudo tee % >/dev/null
 
@@ -305,9 +335,11 @@ cnoremap w!! w !sudo tee % >/dev/null
 
 " Theme
 " colors mustang
+colors epegzz
+" colors hybrid-material
 " colors molokai
 " colors distinguished
-colors spacegray
+" colors spacegray
 " let g:molokai_original=1
 " let g:rehash256 = 1
 " set background=dark
@@ -355,21 +387,21 @@ set clipboard=unnamed
 " --- Text behaviour
 
 " --- Tab specific options
-set tabstop=4        "A tab is 8 spaces
+set tabstop=2        "A tab is 2 spaces
 set expandtab        "Always uses spaces instead of tabs
-set softtabstop=4    "Insert 4 spaces when tab is pressed
-set shiftwidth=4     "An indent is 4 spaces
-set shiftround       "Round indent to nearest shiftwidth multiple
+set softtabstop=2    "Insert 4 spaces when tab is pressed
+set shiftwidth=2     "An indent is 2 spaces
+" set shiftround       "Round indent to nearest shiftwidth multiple
 
-set autoindent "to check
-set cindent
-set smartindent
+" set autoindent "to check
+" set cindent
+" set smartindent
 set showcmd
 set showmode " dont know
 set noshowmatch " when matching bracket is typed don't jump to it - it is better without of it.
 set scrolloff=3 " always visible lines at edge of screen
 set encoding=utf-8
-set hidden " do not kill buffer on hide 
+set hidden " do not kill buffer on hide
 " not yet released :)
 "set breakindent
 
@@ -489,6 +521,7 @@ nnoremap \\ :NERDTree<cr>
 nnoremap \w :w<cr>
 nnoremap \W :w<cr>
 nnoremap :  q:<cr>
+nnoremap \g  :Grepper<cr>
 
 " cancel arrows keys
 " inoremap <Up> <NOP>
@@ -499,7 +532,6 @@ nnoremap :  q:<cr>
 " noremap <Down> <NOP>
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
-"
 
 " Move lines
 " Move one line
@@ -532,7 +564,7 @@ noremap k gk
 nnoremap U :redo<cr>
 noremap H ^
 noremap L g_
-imap <leader><tab> <C-x><C-o> 
+imap <leader><tab> <C-x><C-o>
 
 " Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
 if has("autocmd")
@@ -543,8 +575,8 @@ if has("autocmd")
 endif
 
 "stuff to ignore when tab completing
-set wildignore=*.bak,*.pyc,*.class,node_modules/**
-set wildignore+=*.o,*.obj,*~ 
+set wildignore=*.bak,*.pyc,*.class,**/node_modules/**,**/app/components/**
+set wildignore+=*.o,*.obj,*~
 set wildignore+=*DS_Store*
 set wildignore+=vendor/rails/**
 set wildignore+=vendor/cache/**
@@ -555,6 +587,14 @@ set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 set wildignore+=*/.nx/**,*.app
 " --- Misc
+
+
+" *** IndentLine
+let g:indentLine_faster=1
+let g:indentLine_char="¦"
+if has('win32') || has('win64')
+    let g:indentLine_char="│"
+endif
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -572,5 +612,20 @@ command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> \z  :ZoomToggle<CR>
 " git config --global diff.tool vimdiff
 
-"syntastic               vim-ctrlspace       
-"nerdtree                vim-clojure-static      vim-fireplace           vim-niji                vim-sneak
+
+" show special chars
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
+
+" tnoremap <M-h> <C-\><C-n><C-w>h
+" tnoremap <M-j> <C-\><C-n><C-w>j
+" tnoremap <M-k> <C-\><C-n><C-w>k
+" tnoremap <M-l> <C-\><C-n><C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
+
+
+"vim-ctrlspace
+"vim-clojure-static      vim-fireplace           vim-niji
