@@ -14,3 +14,7 @@
    
 [url "https://"]
 	insteadOf = git://
+[push]
+	default = simple
+[fetch]
+	prune = true
