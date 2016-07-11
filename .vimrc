@@ -39,99 +39,100 @@ set autoread
 "set autowriteall
 
 
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-call neobundle#begin(expand('/Users/artem/.vim/bundle'))
+set runtimepath^=/Users/artem/.nvim/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+call dein#begin(expand('/Users/artem/.nvim'))
 
-NeoBundle 'L9'
+" Let dein manage dein
+" Required:
+call dein#add('Shougo/dein.vim')
+
+" Add or remove your plugins here:
+
+call dein#add('L9')
+
 
 "Bundles
-"NeoBundle 'majutsushi/tagbar'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'FuzzyFinder'
+"call dein#add('majutsushi/tagbar')
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('FuzzyFinder')
 " for tagbar install:
 "npm install -g git://github.com/ramitos/jsctags.git
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle "tomtom/tlib_vim"
-NeoBundle 'garbas/vim-snipmate'
-NeoBundle 'honza/vim-snippets'
+call dein#add('majutsushi/tagbar')
+call dein#add('MarcWeber/vim-addon-mw-utils')
+call dein#add("tomtom/tlib_vim")
+call dein#add('garbas/vim-snipmate')
+call dein#add('honza/vim-snippets')
 " autoclose [], {}, etc
-NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tComment'
-NeoBundle 'jszakmeister/vim-togglecursor'
-NeoBundle 'tpope/vim-surround'
+call dein#add('Raimondi/delimitMate')
+call dein#add('tpope/vim-unimpaired')
+call dein#add('tpope/vim-fugitive')
+call dein#add('tComment')
+call dein#add('jszakmeister/vim-togglecursor')
+call dein#add('tpope/vim-surround')
 " cd ~/.vim/bundle/YouCompleteMe ; ./install.sh --clang-completer ; cd -
-"NeoBundle 'Valloric/YouCompleteMe'
+"call dein#add('Valloric/YouCompleteMe')
 " Using vim-easymotion instead :)
-" NeoBundle 'justinmk/vim-sneak'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'foldcol.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'Lokaltog/vim-distinguished'
-NeoBundle 'Chiel92/vim-autoformat'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'tmhedberg/matchit'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'scrooloose/nerdtree'
+" call dein#add('justinmk/vim-sneak')
+call dein#add('tomasr/molokai')
+call dein#add('foldcol.vim')
+call dein#add('nathanaelkane/vim-indent-guides')
+call dein#add('Lokaltog/vim-distinguished')
+call dein#add('Chiel92/vim-autoformat')
+call dein#add('Lokaltog/vim-easymotion')
+call dein#add('tmhedberg/matchit')
+call dein#add('sjl/gundo.vim')
+call dein#add('scrooloose/nerdtree')
 ":%S/note{,s}/entr{y,ies}/g"
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'mhinz/vim-grepper'
-" NeoBundle 'kassio/neoterm'
+call dein#add('tpope/vim-abolish')
+call dein#add('tpope/vim-repeat')
+call dein#add('terryma/vim-multiple-cursors')
+call dein#add('Shougo/vimshell.vim')
+call dein#add('mhinz/vim-grepper')
+" call dein#add('kassio/neoterm')
 
-NeoBundle 'epegzz/epegzz.vim'
-" NeoBundle 'w0ng/vim-hybrid'
-" NeoBundle 'kristijanhusak/vim-hybrid-material'
+call dein#add('epegzz/epegzz.vim') " black
+" call dein#add('w0ng/vim-hybrid')
+call dein#add('kristijanhusak/vim-hybrid-material')
 
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-" NeoBundle 'Shougo/unite.vim'
-NeoBundle "ctrlpvim/ctrlp.vim"
+"NeoBundle 'Shougo/vimproc.vim', {
+""\ 'build' : {
+""\     'windows' : 'tools\\update-dll-mingw',
+""\     'cygwin' : 'make -f make_cygwin.mak',
+""\     'mac' : 'make -f make_mac.mak',
+""\     'linux' : 'make',
+""\     'unix' : 'gmake',
+""\    },
+""\ }
+" call dein#add('Shougo/unite.vim')
+call dein#add('ctrlpvim/ctrlp.vim')
 
-nnoremap <leader>f :CtrlP<cr><Space>
+nnoremap <c-f> :CtrlP<cr><Space>
 nnoremap <s-tab> :CtrlPBuffer<cr>
 
 
 " let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-NeoBundle 'amirh/HTML-AutoCloseTag'
-" NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'terryma/vim-expand-region'
-NeoBundle 'YankRing.vim'
-" NeoBundle 'reedes/vim-wheel'
-NeoBundle 'godlygeek/tabular.git'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'sgur/vim-textobj-parameter'
-NeoBundle 'thinca/vim-textobj-between'
-NeoBundle 'editorconfig/editorconfig-vim'
+call dein#add('amirh/HTML-AutoCloseTag')
+" call dein#add('airblade/vim-gitgutter')
+call dein#add('terryma/vim-expand-region')
+call dein#add('YankRing.vim')
+" call dein#add('reedes/vim-wheel')
+call dein#add('godlygeek/tabular.git')
+call dein#add('kana/vim-textobj-user')
+call dein#add('sgur/vim-textobj-parameter')
+call dein#add('thinca/vim-textobj-between')
+call dein#add('editorconfig/editorconfig-vim')
 
 " to enable suntactic do: npm install -g jsxhint
-NeoBundle 'scrooloose/syntastic'
+call dein#add('scrooloose/syntastic')
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -144,19 +145,20 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 
 " turn it on or off
-nnoremap <leader>N :SyntasticToggleMode<cr>
+nnoremap <leader-n> :SyntasticToggleMode<cr>
 
 " cd ~/.vim/bundle/tern_for_vim ; npm install
-NeoBundle 'marijnh/tern_for_vim', {
-            \ 'build' : {
-            \   'mac': 'npm install --update',
-            \   },
-            \ }
+"NeoBundle 'marijnh/tern_for_vim', {
+"            \ 'build' : {
+"            \   'mac': 'npm install --update',
+"            \   },
+"            \ }
 
-NeoBundle 'jelera/vim-javascript-syntax'
+call dein#add('tpope/vim-dispatch.git')
+call dein#add('jelera/vim-javascript-syntax')
 " Intendation and syntax:
-NeoBundle "pangloss/vim-javascript"  " Required for vim-jsx to work correctly
-NeoBundle 'mxw/vim-jsx'
+call dein#add("pangloss/vim-javascript")  " Required for vim-jsx to work correctly
+call dein#add('mxw/vim-jsx')
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 " let g:syntastic_debug = 3   " Turn on if there are problems
 
@@ -165,28 +167,28 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 let g:js_context_colors_insertmode = 0
 "To disable:
 " g:js_context_colors_enabled = 0
-NeoBundle 'bigfish/vim-js-context-coloring'
-NeoBundle 'bigfish/vim-js-context-coloring', {
-  \ 'build' : {
-  \     'mac' : 'npm install --update',
-  \     'unix' : 'npm install --update',
-  \    },
-  \ }
+call dein#add('bigfish/vim-js-context-coloring')
+call dein#add('bigfish/vim-js-context-coloring')
+  " \ 'build' : {
+  " \     'mac' : 'npm install --update',
+  " \     'unix' : 'npm install --update',
+  " \    },
+  " \ }
 
-NeoBundle 'raichoo/purescript-vim.git'
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'leafgarland/typescript-vim'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'ajh17/Spacegray.vim'
+call dein#add('raichoo/purescript-vim.git')
+call dein#add('derekwyatt/vim-scala')
+call dein#add('leafgarland/typescript-vim')
+call dein#add('fatih/vim-go')
+call dein#add('ajh17/Spacegray.vim')
 
-NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'bling/vim-airline'
+call dein#add('eagletmt/neco-ghc')
+call dein#add('bling/vim-airline')
 
 " Plugin to show color palette:
 ":XtermColorTable
-NeoBundle 'guns/xterm-color-table.vim'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'kien/rainbow_parentheses.vim'
+call dein#add('guns/xterm-color-table.vim')
+call dein#add('Yggdroot/indentLine')
+call dein#add('kien/rainbow_parentheses.vim')
 " let g:rbpt_colorpairs = [
 "     \ ['brown',       'RoyalBlue3'],
 "     \ ['Darkblue',    'SeaGreen3'],
@@ -212,18 +214,16 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 au Syntax * RainbowParenthesesLoadChevrons
 
-
-
-" Required:
-call neobundle#end()
-
-" Required:
+" Required at plugins end:
+call dein#end()
 filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+ call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 "Plugins settings:
 set omnifunc=syntaxcomplete#Complete
@@ -335,8 +335,8 @@ cnoremap w!! w !sudo tee % >/dev/null
 
 " Theme
 " colors mustang
-colors epegzz
-" colors hybrid-material
+" colors epegzz
+colors hybrid_material
 " colors molokai
 " colors distinguished
 " colors spacegray
