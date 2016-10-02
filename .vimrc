@@ -45,10 +45,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath^=/Users/artem/.nvim/repos/github.com/Shougo/dein.vim
+set runtimepath^=/Users/artem/.vim/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin(expand('/Users/artem/.nvim'))
+call dein#begin(expand('/Users/artem/.vim'))
 
 " Let dein manage dein
 " Required:
@@ -96,10 +96,11 @@ call dein#add('tpope/vim-repeat')
 call dein#add('terryma/vim-multiple-cursors')
 call dein#add('Shougo/vimshell.vim')
 call dein#add('mhinz/vim-grepper')
+call dein#add('solarnz/thrift.vim')
 " call dein#add('kassio/neoterm')
 
 call dein#add('epegzz/epegzz.vim') " black
-" call dein#add('w0ng/vim-hybrid')
+call dein#add('w0ng/vim-hybrid')
 call dein#add('kristijanhusak/vim-hybrid-material')
 
 "NeoBundle 'Shougo/vimproc.vim', {
@@ -133,7 +134,7 @@ call dein#add('editorconfig/editorconfig-vim')
 
 " to enable suntactic do: npm install -g jsxhint
 call dein#add('scrooloose/syntastic')
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_javascript_checkers = ['eslint', 'flow', 'stylelint']
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -334,15 +335,18 @@ cnoremap w!! w !sudo tee % >/dev/null
 
 
 " Theme
+set background=dark
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 " colors mustang
 " colors epegzz
 colors hybrid_material
+" let g:airline_theme = "hybrid"
 " colors molokai
 " colors distinguished
 " colors spacegray
 " let g:molokai_original=1
 " let g:rehash256 = 1
-" set background=dark
 " let g:solarized_termcolors=256
 " let g:solarized_visibility = "high"
 " let g:solarized_contrast = "high"
@@ -375,11 +379,9 @@ set hlsearch
 " Autosave
 "set updatetime=1000
 ""autocmd CursorHoldI,CursorHold * :update
-"set undofile " creates undofile
 set path+=./** " for gd/gf to find local files
-set autoread
 " change dir to dir of opened file
-"set autochdir
+" set autochdir
 set clipboard=unnamed
 
 
