@@ -34,7 +34,8 @@ let vimDir = '$HOME/.vim'
 au FocusGained,BufEnter * :checktime
 " autoread file when :checktime says this
 set autoread
-"au CursorHold * checktime "wrong with command mode
+"au CursorHold * if getcmdwintype() == '' | checktime | endif
+"au CursorHold,CursorHoldI * silent! checktime
 "set autowrite
 "set autowriteall
 
@@ -100,8 +101,23 @@ call dein#add('solarnz/thrift.vim')
 " call dein#add('kassio/neoterm')
 
 call dein#add('epegzz/epegzz.vim') " black
-call dein#add('w0ng/vim-hybrid')
+"call dein#add('w0ng/vim-hybrid')
 call dein#add('kristijanhusak/vim-hybrid-material')
+
+" call dein#add('flowtype/vim-flow', {
+"             \ 'autoload': {
+"             \     'filetypes': 'javascript'
+"             \ },
+"             \ 'build': {
+"             \     'mac': 'npm install -g flow-bin',
+"             \     'unix': 'npm install -g flow-bin'
+"             \ }})
+"
+" let g:flow#errjmp = 0
+" let g:flow#enable = 1
+" let g:flow#autoclose = 0
+" let g:flow#qfsize = 0
+" let g:flow#omnifunc = 1
 
 "NeoBundle 'Shougo/vimproc.vim', {
 ""\ 'build' : {
@@ -131,10 +147,24 @@ call dein#add('kana/vim-textobj-user')
 call dein#add('sgur/vim-textobj-parameter')
 call dein#add('thinca/vim-textobj-between')
 call dein#add('editorconfig/editorconfig-vim')
+" call dein#add('dyegocosta/syntastic-local-eslint_d.vim')
+
+" Very bad when webpack watch your work
+" call dein#add('907th/vim-auto-save')
+" let g:auto_save = 1
+" let g:auto_save_silent = 1
+" let g:auto_save_in_insert_mode = 0
+:set noconfirm
+
+call dein#add('vim-scripts/auto_autoread.vim')
 
 " to enable suntactic do: npm install -g jsxhint
 call dein#add('scrooloose/syntastic')
-let g:syntastic_javascript_checkers = ['eslint', 'flow', 'stylelint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow', 'stylelint', 'shellcheck', 'checkbashisms']
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -144,6 +174,13 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_javascript_flow_exe = 'flow'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
 " turn it on or off
 nnoremap <leader-n> :SyntasticToggleMode<cr>
@@ -183,7 +220,7 @@ call dein#add('fatih/vim-go')
 call dein#add('ajh17/Spacegray.vim')
 
 call dein#add('eagletmt/neco-ghc')
-call dein#add('bling/vim-airline')
+call dein#add('vim-airline/vim-airline')
 
 " Plugin to show color palette:
 ":XtermColorTable
@@ -340,7 +377,8 @@ let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 " colors mustang
 " colors epegzz
-colors hybrid_material
+colorscheme hybrid_reverse
+"colors hybrid_material
 " let g:airline_theme = "hybrid"
 " colors molokai
 " colors distinguished
